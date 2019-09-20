@@ -44,6 +44,7 @@ void printUsage(char* argv[])
 	if (threshold <= 0 || scale <= 0 || max_iterations <= 0) {
 		printf("The threshold, scale, and max_iterations must be > 0");
 		printUsage(argv);
+		free(center);
 		return 1;
 	}
 	u_int64_t size = 2 * resolution + 1;
@@ -53,12 +54,14 @@ void printUsage(char* argv[])
 	ar = (u_int64_t *)malloc(size * size * sizeof(u_int64_t));
 	if (ar == NULL) {
 		printf("Unable to allocate %lu bytes\n", size * size * sizeof(u_int64_t));
+		free(center);
 		return 1;
 	}
 	printf("Beginning calculation of Mandelbrot grid centered on %lf + %lfi, with scale of %lf, max iterations of %lu, \nthreshold of %lf, and resolution of %lu \n",
 		atof(argv[3]), atof(argv[4]), scale, max_iterations, threshold, resolution);
 
 	Mandelbrot(threshold, max_iterations, center, scale, resolution, ar);
+	free(center);
 
 	printf("Calculation complete, outputting to file %s\n", argv[7]);
 	FILE* outputfile = fopen(argv[7], "w+");
@@ -72,5 +75,6 @@ void printUsage(char* argv[])
 		fputc('\n', outputfile);
 	}
 	free(ar);
+	fclose(outputfile);
 	return 0;
 }
