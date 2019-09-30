@@ -43,15 +43,15 @@ memcheckB2: MandelMovie
 	valgrind --tool=memcheck --leak-check=full --dsymutil=yes --track-origins=yes ./MandelMovie 2 1536 -0.561397233777 -0.643059076016 2 1e-7 5 100 student_output/partB defaultcolormap.txt
 
 testB2Small:  MandelMovie
-	./MandelMovie 2 1536 5 3 8 2 3 2 student_output/partBSmall defaultcolormap.txt
-	python verify.py testing/testBSmall student_output/partBSmall
+	./MandelMovie 2 1536 5 3 8 2 3 2 student_output/testBSmall defaultcolormap.txt
+	python verify.py testing/testBSmall student_output/testBSmall
 
 memcheckB2Small: MandelMovie
-	valgrind --tool=memcheck --leak-check=full --dsymutil=yes --track-origins=yes ./MandelMovie 2 1536 5 3 8 2 3 2 student_output/partBSmall defaultcolormap.txt
+	valgrind --tool=memcheck --leak-check=full --dsymutil=yes --track-origins=yes ./MandelMovie 2 1536 5 3 8 2 3 2 student_output/testBSmall defaultcolormap.txt
 
 BigTest:  MandelMovie
 	printf "WARNING: This is a very big test that could take close to two hours to finish; if you want to have this run in the background try nohup make BigTest to run this in the backround and use top to check progress. Only do this if you are confident in your solution"
-	./MandelMovie 2 1536 -0.561397233777 0.643059076016 2 1e-7 576 400 student_output/BigTest defaultcolormap.txt
+	./MandelMovie 2 1536 -0.561397233777 -0.643059076016 2 1e-7 576 400 student_output/BigTest defaultcolormap.txt
 	python verify.py testing/BigTest student_output/BigTest
 
 %.o: %.c
