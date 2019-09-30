@@ -80,8 +80,6 @@ void printUsage(char* argv[])
 		}
 		fputc('\n', outputfile);
 	}	
-	
-	fclose(outputfile);
 
 	//END STEP 3
 
