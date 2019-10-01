@@ -49,6 +49,10 @@ void Mandelbrot(double threshold, u_int64_t max_iterations, ComplexNumber* cente
     ComplexNumber* ref;
     int pixel = resolution * 2 + 1;
     int index = 0;
+    if(resolution == 0) {
+        output[0] = MandelbrotIterations(max_iterations, center, threshold);
+        return;
+    }
     for(int i = 0; i < pixel; i++) {
         for(int j = 0; j < pixel; j++) {
             ref = newComplexNumber(real_left + (j * (scale/resolution)), im_left - (i * (scale/resolution)));

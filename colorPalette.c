@@ -28,6 +28,10 @@ int P3colorpalette(char* colorfile, int width, int heightpercolor, char* outputf
 		free(ref);
 		return 1;
 	}
+	if(colorcount == 0) {
+		free(ref);
+		return 1;
+	}
 	FILE* result = fopen(outputfile, "w");
 	int vert_dim = heightpercolor * (colorcount);
 	fprintf(result, "P3 %u %u 255\n", width, vert_dim);
@@ -59,6 +63,10 @@ int P6colorpalette(char* colorfile, int width, int heightpercolor, char* outputf
 	int colorcount;
 	uint8_t** ref = FileToColorMap(colorfile, &colorcount);
 	if(ref == NULL) {
+		free(ref);
+		return 1;
+	}
+	if(colorcount == 0){
 		free(ref);
 		return 1;
 	}
